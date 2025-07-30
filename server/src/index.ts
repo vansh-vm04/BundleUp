@@ -3,6 +3,9 @@ import { dbConnect } from "./db"
 import router from "./route"
 const app = express()
 const port = 3000
+import { configDotenv } from "dotenv"
+
+configDotenv();
 
 dbConnect();
 
