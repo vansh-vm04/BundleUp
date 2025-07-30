@@ -13,7 +13,8 @@ const ContentSchema = new mongoose.Schema({
     type:{type:String,enum:contentTypes,required:true},
     link:{type:String,required:true},
     userId:{type:Schema.Types.ObjectId, ref:'User'},
-    tags:{type:Schema.Types.ObjectId, ref:'Tag'}
+    tags:{type:Schema.Types.ObjectId, ref:'Tag'},
+    bundleId:{type:Schema.Types.ObjectId,ref:'Bundle',required:true}
 })
 
 const TagSchema = new mongoose.Schema({
@@ -21,14 +22,14 @@ const TagSchema = new mongoose.Schema({
 })
 
 const BundleSchema = new mongoose.Schema({
+    name:{type:String,required:true},
     userId:{type:Schema.Types.ObjectId,required:true,ref:'User'},
-    content:{type:Array<Schema.Types.ObjectId>, ref:'Content', required:true}
+    content:[{type:Schema.Types.ObjectId, ref:'Content'}]
 })
 
 const LinkSchema = new mongoose.Schema({
-    hash:{type:String,required:true},
     userId:{type:Schema.Types.ObjectId,required:true,ref:'User'},
-    bundleId:{type:Schema.Types.ObjectId,required:true,ref:'Bundle'}
+    bundleId:{type:Schema.Types.ObjectId,required:true,unique:true,ref:'Bundle'}
 })
 
 export const UserModel = mongoose.model('User',UserSchema)
