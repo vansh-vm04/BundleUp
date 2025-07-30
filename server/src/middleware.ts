@@ -10,7 +10,7 @@ export const authMiddleware = (req:Request,res:Response,next:NextFunction)=>{
         const token = authHeader.split(' ')[1]
         const decoded = jwt.verify(token,JWT_SECRET);
         //@ts-ignore
-        req.user = decoded;
+        req.userId = decoded.id;
         next();
     } catch (error) {
         res.status(500).json({message:"Internal server error"})
