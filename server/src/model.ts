@@ -23,8 +23,7 @@ const TagSchema = new mongoose.Schema({
 
 const BundleSchema = new mongoose.Schema({
     name:{type:String,required:true},
-    userId:{type:Schema.Types.ObjectId,required:true,ref:'User'},
-    content:[{type:Schema.Types.ObjectId, ref:'Content'}]
+    userId:{type:Schema.Types.ObjectId,required:true,ref:'User'}
 })
 
 const LinkSchema = new mongoose.Schema({
