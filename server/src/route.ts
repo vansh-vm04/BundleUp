@@ -101,6 +101,17 @@ router.post('/content',authMiddleware,async (req:Request,res:Response)=>{
         console.log(error)
     }
 })
+router.get('/all-content',authMiddleware,async(req:Request,res:Response)=>{
+    //@ts-ignore
+    const userId = req.userId;
+    try {
+        const content = await ContentModel.find({userId:userId});
+        res.status(ResponseCode.Success).json({message:"Content found",content:content})
+    } catch (error) {
+        res.status(ResponseCode.ServerError).json({message:"Internal server error"}) 
+        console.log(error)
+    }
+})
 router.get('/content/:bundleId',authMiddleware,async (req:Request,res:Response)=>{
     const bundleId = req.params.bundleId;
     try {
