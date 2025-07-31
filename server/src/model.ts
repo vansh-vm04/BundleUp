@@ -1,14 +1,14 @@
 import mongoose,{Schema} from "mongoose"
 
 const UserSchema = new mongoose.Schema({
-    username:{type:String,unique:true},
-    password:String
+    username:{type:String,unique:true,required:true},
+    password:{type:String}
 })
 
 const contentTypes = ['video','audio','blog','tweet','article','other']
 
 const ContentSchema = new mongoose.Schema({
-    title:{type:String,required:true},
+    title:{type:String,required:true,maxLength:30},
     description:{type:String},
     type:{type:String,enum:contentTypes,required:true},
     link:{type:String,required:true},
@@ -18,11 +18,11 @@ const ContentSchema = new mongoose.Schema({
 })
 
 const TagSchema = new mongoose.Schema({
-    tagName:{type:String,required:true}
+    tagName:{type:String,required:true,maxLength:20}
 })
 
 const BundleSchema = new mongoose.Schema({
-    name:{type:String,required:true},
+    name:{type:String,required:true,maxLength:30},
     userId:{type:Schema.Types.ObjectId,required:true,ref:'User'}
 })
 
