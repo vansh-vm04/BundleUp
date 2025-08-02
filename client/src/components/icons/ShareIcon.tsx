@@ -1,5 +1,7 @@
 interface Size{
   size:"sm" | "md" | "lg";
+  fill:'white' | 'black';
+  onClick?: ()=>void;
 } 
 const sizeType = {
   "sm": "size-4",
@@ -9,7 +11,7 @@ const sizeType = {
 const ShareIcon = (props:Size) => {
   return (
     <svg
-      className={`${sizeType[props.size]} fill-black`}
+      className={`${sizeType[props.size]} fill-${props.fill}`}
       viewBox="0 0 32 32"
       xmlns="http://www.w3.org/2000/svg"
     >

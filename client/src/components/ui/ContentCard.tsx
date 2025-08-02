@@ -9,10 +9,11 @@ import LinkCard from "./LinkCard"
 
 interface ContentProps{
     title:string, 
-    type:"video" | "audio" | "tweet" | "blog" | "other",
+    type:contentType,
     link:string,
     [key:string]:unknown
 }
+type contentType = "video" | "audio" | "tweet" | "blog" | "other";
 const Type = {
     "video" : <VideoIcon/>,
     "audio" : <AudioIcon/>,
@@ -24,14 +25,14 @@ const Type = {
 const ContentCard = (props:ContentProps) => {
   return (
     <div className="flex shadow-xl gap-2 flex-col items-center rounded-xl h-[344px] p-4 w-[344px] bg-black overflow-hidden">
-        <div className="flex w-full justify-between">
+        <div className="flex w-full justify-between px-2 py-1">
         <div className="flex gap-3">
             {Type[props.type]}
             <span className="text-white font-semibold truncate w-[144px]">{props.title}</span>
         </div>
         <div className="flex gap-3">
             <EditIcon size={"md"}/>
-            <ShareIcon size={"md"}/>
+            <ShareIcon fill="white" size={"md"}/>
         </div>
         </div>
         <LinkCard url={props.link}/>

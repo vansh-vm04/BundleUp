@@ -1,8 +1,8 @@
 import { useLocation } from "react-router-dom";
 import Button from "../components/ui/Button";
 import PlusIcon from "../components/icons/PlusIcon";
-import ShareIcon from "../components/icons/ShareIcon";
 import ContentCard from "../components/ui/ContentCard";
+import ShareIcon from "../components/icons/ShareIcon";
 
 interface title {
   [key: string]: string;
@@ -10,9 +10,9 @@ interface title {
 
 const content = [
   {
-    title: "CSS Grid Crash Course",
-    type: "video",
-    link: "https://www.youtube.com/watch?v=EFafSYg-PkI"
+    title: "Fell for you",
+    type: "audio",
+    link: "https://open.spotify.com/track/5ZLkihi6DVsHwDL3B8ym1t?si=42dc7db4caef4c78"
   },
   {
     title: "Understanding Promises in JavaScript",
@@ -53,7 +53,7 @@ const content = [
 
 
 const Titles: title = {
-  "": "Bundles",
+  "": "All Contents",
   video: "Video Content",
   audio: "Audio Content",
   tweet: "Tweets",
@@ -65,24 +65,34 @@ const Home = () => {
   const location = useLocation();
   const url: string = location.pathname.replace("/", "");
 
+  const shareContents = ()=>{
+
+  }
+
+  const addContent = ()=>{
+
+  }
+
   return (
-    <div className="bg-black/70 items-center ml-[314px] max-md:m-0 flex flex-col w-screen h-screen">
-      <div className="w-full py-8 px-10 flex justify-between items-center">
+    <div className="bg-black/60 items-center ml-[284px] max-lg:m-0 max-md:m-0 flex flex-col w-screen h-screen">
+      <div className="w-full py-8 px-10 max-md:px-2 flex max-md justify-between items-center">
         <span className="text-white text-3xl font-bold items-center justify-center">{Titles[url]}</span>
         <div className="flex gap-4 items-center justify-center">
           <Button
-            text="Add Bundle"
+          onClick={addContent}
+            text="Add Content"
             variant="primary"
             startIcon={<PlusIcon />}
           />
           <Button
+          onClick={shareContents}
             text="Share"
             variant="secondary"
-            startIcon={<ShareIcon size="md" />}
+            startIcon={<ShareIcon size='md' fill="black"/>}
           />
         </div>
       </div>
-      <div className="grid items-center overflow-y-scroll hide-scrollbar scroll-smooth max-md:grid-cols-1 grid-cols-3 py-6 gap-6">
+      <div className="grid items-center overflow-y-scroll hide-scrollbar scroll-smooth max-lg:grid-cols-2 max-md:grid-cols-1 grid-cols-3 py-6 gap-6">
         {content.map((c,i)=>(
           <ContentCard key={i} title={c.title} type={c.type} link={c.link}/>
         ))}

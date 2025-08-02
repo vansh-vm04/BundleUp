@@ -1,5 +1,6 @@
 interface Size{
   size:"sm" | "md" | "lg";
+  onClick?: ()=>void;
 } 
 const sizeType = {
   "sm": "size-4",
@@ -10,6 +11,7 @@ const sizeType = {
 const EditIcon = (props:Size) => {
   return (
     <svg
+    onClick={()=>props.onClick}
       className={`${sizeType[props.size]} fill-white`}
       id="Layer_1"
       styles="enable-background:new 0 0 24 24;"
