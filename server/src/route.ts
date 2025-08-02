@@ -1,7 +1,7 @@
 import express from "express";
 const router = express.Router();
 import { Request, Response } from "express";
-import { BundleModel, ContentModel, LinkModel, UserModel } from "./model";
+import {ContentModel, UserModel } from "./model";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { authMiddleware } from "./middleware";
@@ -90,6 +90,17 @@ router.post("/sign-in", async (req: Request, res: Response) => {
     console.log(error);
   }
 });
+router.get('/verify',authMiddleware,async (req:Request,res:Response)=>{
+    //@ts-ignore
+    const userId = req.userId;
+    try {
+        const user = await UserModel.findById(userId);
+        res.status(ResponseCode.Success).json({message:"Success",user:{username:user?.username,sharing:user?.share}});
+    } catch (error) {
+        res.status(ResponseCode.ServerError).json({message:"Internal server error"})
+        console.log(error)
+    }
+})
 router.post('/content',authMiddleware,async (req:Request,res:Response)=>{
     const content = req.body;
     try {
@@ -101,21 +112,17 @@ router.post('/content',authMiddleware,async (req:Request,res:Response)=>{
         console.log(error)
     }
 })
-router.get('/all-content',authMiddleware,async(req:Request,res:Response)=>{
+router.get('/content/:type',authMiddleware,async (req:Request,res:Response)=>{
+    const contentType = req.params.type;
     //@ts-ignore
     const userId = req.userId;
     try {
-        const content = await ContentModel.find({userId:userId});
-        res.status(ResponseCode.Success).json({message:"Content found",content:content})
-    } catch (error) {
-        res.status(ResponseCode.ServerError).json({message:"Internal server error"}) 
-        console.log(error)
-    }
-})
-router.get('/content/:bundleId',authMiddleware,async (req:Request,res:Response)=>{
-    const bundleId = req.params.bundleId;
-    try {
-        const content = await ContentModel.find({bundleId:bundleId});
+        let content;
+        if(contentType==''){
+            content = await ContentModel.find({userId:userId});
+        }else{
+            content = await ContentModel.find({userId:userId,type:contentType});
+        }
         res.status(ResponseCode.Success).json({message:"Success",content:content})
     } catch (error) {
         res.status(ResponseCode.ServerError).json({message:"Internal server error"}) 
@@ -141,78 +148,25 @@ router.delete('/content',authMiddleware,async (req:Request,res:Response)=>{
         console.log(error)
     }
 })
-router.post('/bundle',authMiddleware,async (req:Request,res:Response)=>{
-    const {name} = req.body;
-    try {
-        //@ts-ignore
-        const userId = req.userId;
-        const bundle = new BundleModel({
-            name:name,
-            userId:userId
-        });
-        await bundle.save();
-        res.status(ResponseCode.Success).json({message:"Bundle created"})
-    } catch (error) {
-        res.status(ResponseCode.ServerError).json({message:"Internal server error"})
-        console.log(error)
-    }
-})
-router.get('/bundle',authMiddleware,async (req:Request,res:Response)=>{
+router.patch('/share',authMiddleware,async (req:Request,res:Response)=>{
     //@ts-ignore
     const userId = req.userId;
+    const sharing = req.body.sharing;
     try {
-        const bundles = await BundleModel.find({userId:userId})
-        res.status(ResponseCode.Success).json({message:"Success",bundle:bundles})
+        const response = await UserModel.findByIdAndUpdate(userId,{share:sharing},{new:true});
+        res.status(ResponseCode.Success).json({message:"Success",sharing:response?.share,userId:userId})
     } catch (error) {
         res.status(ResponseCode.ServerError).json({message:"Internal server error"})
         console.log(error)
     }
 })
-router.delete('/bundle',authMiddleware,async (req:Request,res:Response)=>{
-    const {bundleId} = req.body;
+router.get('/open/:userId',async (req:Request,res:Response)=>{
+    const userId = req.params.userId;
     try {
-        await BundleModel.deleteOne({_id:bundleId});
-        res.status(200).json({message:"Bundle deleted successfully"})
-    } catch (error) {
-        res.status(ResponseCode.ServerError).json({message:"Internal server error"})
-        console.log(error)
-    }
-})
-router.patch('/bundle',authMiddleware,async (req:Request,res:Response)=>{
-    const {bundleName,bundleId} = req.body;
-    try {
-        await BundleModel.findByIdAndUpdate(bundleId,{name:bundleName});
-        res.status(ResponseCode.Success).json({message:"Bundle Updated Successfully"})
-    } catch (error) {
-        res.status(ResponseCode.ServerError).json({message:"Internal server error"})
-        console.log(error)
-    }
-})
-router.post('/share',authMiddleware,async (req:Request,res:Response)=>{
-    const {bundleId} = req.body;
-    //@ts-ignore
-    const userId = req.userId;
-    try {
-        const linkExist = await LinkModel.findOne({bundleId:bundleId});
-        if(linkExist) return res.status(ResponseCode.Success).json({message:"Link Created",link:linkExist._id})
-        const link = new LinkModel({
-            userId:userId,
-            bundleId:bundleId
-        })
-        await link.save()
-        res.status(ResponseCode.Success).json({message:"Link created",link:link._id})
-    } catch (error) {
-        res.status(ResponseCode.ServerError).json({message:"Internal server error"})
-        console.log(error)
-    }
-})
-router.get('/open/:link',authMiddleware,async (req:Request,res:Response)=>{
-    const link = req.params.link;
-    try {
-        const linkExist = await LinkModel.findById(link);
-        if(!linkExist) return res.status(ResponseCode.NotFound).json({message:"Link not available"})
-        const content = await ContentModel.find({bundleId:linkExist.bundleId})
-        res.status(ResponseCode.Success).json({message:"Content loaded successfully",content:content})
+        const user = await UserModel.findById(userId);
+        if(!user?.share) return res.status(ResponseCode.Success).json({message:"Content Private",username:user?.username,content:[]});
+        const content = await ContentModel.find({userId:userId});
+        res.status(ResponseCode.Success).json({message:"Content found",username:user?.username,content:content});
     } catch (error) {
         res.status(ResponseCode.ServerError).json({message:"Internal server error"})
         console.log(error)
