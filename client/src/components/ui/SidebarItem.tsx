@@ -9,7 +9,7 @@ interface ItemProps{
 
 const SidebarItem = (props:ItemProps) => {
   return (
-    <div onClick={()=>props.onClick()} className={`${props.clicked ? "bg-white/10 text-white" : "bg-black text-gray-400"} py-3 px-8 font-semibold hover:bg-white/10 hover:cursor-pointer rounded-sm items-center flex gap-4 w-[244px] h-fit`}>
+    <div onClick={()=>props.onClick()} className={`${props.clicked ? "bg-white/10 text-white" : "bg-black text-gray-400"} transform-3d duration-200 transition-transform py-3 px-8 font-semibold hover:bg-white/10 hover:cursor-pointer rounded-sm items-center flex gap-4 w-[284px] h-fit`}>
         <div className="w-fit h-fit">
             {props.icon}
         </div>

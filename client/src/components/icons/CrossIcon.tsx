@@ -1,9 +1,12 @@
+interface Props{
+  onClick:()=>void
+}
 
-
-const CrossIcon = () => {
+const CrossIcon = (props:Props) => {
   return (
     <svg
-    className="size-4 fill-white"
+    onClick={()=>props.onClick()}
+    className="size-3 hover:cursor-pointer fill-white"
       styles="enable-background:new 0 0 36 36;"
       version="1.1"
       viewBox="0 0 36 36"

@@ -7,8 +7,8 @@ interface ButtonProps{
     onClick: ()=>void;
 }
 const variantTypes = {
-  "primary":"bg-primary hover:bg-blue-500 shadow-xl w-fit h-fit hover:cursor-pointer font-semibold rounded-md px-4 py-2 text-white flex item-center justify-center gap-1",
-  "secondary":"bg-secondary hover:bg-gray-200 shadow-xl w-fit h-fit hover:cursor-pointer font-semibold rounded-md px-4 py-2 text-black flex item-center justify-center gap-1"
+  "primary":"bg-primary hover:bg-blue-500 shadow-xl w-fit h-fit hover:cursor-pointer font-semibold rounded-md px-4 py-2 max-md:(px-2 py-1 text-md font-normal) text-white flex item-center justify-center gap-1",
+  "secondary":"bg-secondary hover:bg-gray-200 shadow-xl w-fit h-fit hover:cursor-pointer font-semibold rounded-md px-4 py-2 text-black flex item-center max-md:(px-2 py-1 text-md font-normal) justify-center gap-1"
 }
 const Button = (props:ButtonProps) => {
   return (

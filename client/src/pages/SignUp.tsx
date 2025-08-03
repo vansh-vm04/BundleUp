@@ -23,7 +23,7 @@ const SignUp = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, ease: "easeOut" }}
          className="bg-black w-[344px] rounded-2xl gap-8 pb-12 pt-6 px-8 shadow-lg flex flex-col items-center">
-          <div className="flex flex-col items-center">
+          <div className="flex flex-col gap-4 items-center">
             <Logo />
             <span className="text-xl font-medium text-white">
               Sign up to continue

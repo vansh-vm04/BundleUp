@@ -1,4 +1,4 @@
-import OtherIcon from "../icons/OtherIcon";
+import BundlesIcon from "../icons/BundlesIcon";
 
 interface LinkProps{
     url:string
@@ -18,18 +18,18 @@ const LinkCard = (props:LinkProps) => {
     if(isTwitter){
         url = url.replace("x.com","twitter.com");
         return <div className="">
-            <blockquote class="twitter-tweet" data-theme="dark"><a href={url}>X Post</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+            <blockquote class="twitter-tweet" data-theme="dark"><a href={url}>X Post</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charet="utf-8"></script>
         </div>
     }
     if(isSpotify){
         url = url.replace('open.spotify.com','open.spotify.com/embed');
         return <div>
-         <iframe data-testid="embed-iframe" styles="border-radius:12px" src={url} width="100%" height={'344px'} frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+         <iframe data-testid="embed-iframe" styles="border-radius:12px" src={url} width="100%" height={'344px'} frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" ></iframe>
     </div>
     }
   return (
-    <a href={url} rel="noopener noreferrer" target="_blank" className="hover:cursor-pointer flex items-center h-full justify-center">
-        <OtherIcon size="lg"/>
+    <a target="_blank" href={url} className="flex items-center justify-center h-full w-full hover:cursor-pointer">
+          <BundlesIcon size="lg"/>
     </a>
   )
 }

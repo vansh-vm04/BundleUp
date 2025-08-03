@@ -3,14 +3,18 @@ import Home from "./pages/Home"
 import { Route,Routes, useLocation } from "react-router-dom"
 import SignIn from "./pages/SignIn"
 import SignUp from "./pages/SignUp"
+import CreateContentModal from "./components/ui/CreateContentModal"
+import ShareContentModal from "./components/ui/ShareContentModal"
 
 function App() {
   const location = useLocation();
   const sidbarRoutes = ['/','/video','/audio','/blog','/tweet','/other']
   const showSidbar:boolean = sidbarRoutes.includes(location.pathname);
   return (
-  <div className="flex">
+  <div className="flex bg-black/20">
    {showSidbar && <Sidebar/>}
+   <CreateContentModal/>
+   <ShareContentModal/>
     <Routes>
       <Route path='/' element={<Home/>}/>
       <Route path='/video' element={<Home/>}/>
