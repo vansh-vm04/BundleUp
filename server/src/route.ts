@@ -104,6 +104,8 @@ router.get('/verify',authMiddleware,async (req:Request,res:Response)=>{
 router.post('/content',authMiddleware,async (req:Request,res:Response)=>{
     const content = req.body;
     try {
+      //@ts-ignore
+      content.userId = req.userId;
         const contentData = new ContentModel(content);
         await contentData.save();
         res.status(ResponseCode.Success).json({message:"Resource saved successfully"})
