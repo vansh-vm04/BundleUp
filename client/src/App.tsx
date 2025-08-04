@@ -5,6 +5,7 @@ import SignIn from "./pages/SignIn"
 import SignUp from "./pages/SignUp"
 import CreateContentModal from "./components/ui/CreateContentModal"
 import ShareContentModal from "./components/ui/ShareContentModal"
+import ToastMessage from "./components/ui/ToastMessage"
 
 function App() {
   const location = useLocation();
@@ -15,6 +16,7 @@ function App() {
    {showSidbar && <Sidebar/>}
    <CreateContentModal/>
    <ShareContentModal/>
+   <ToastMessage/>
     <Routes>
       <Route path='/' element={<Home/>}/>
       <Route path='/video' element={<Home/>}/>
