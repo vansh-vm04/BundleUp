@@ -1,6 +1,7 @@
+import type { Ref } from "react";
 
 interface InputProps {
-  ref: unknown;
+  ref: Ref<HTMLInputElement>;
   placeholder: string;
   id: string;
   label: string;
