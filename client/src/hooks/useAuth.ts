@@ -26,8 +26,14 @@ const verify = async () =>{
     }
 }
 
+const logOut = () =>{
+    localStorage.removeItem('token');
+    window.location.replace(`${env.VITE_FRONTEND_URL}/signin`);
+}
+
 export const useAuth = () =>{
     return {
-        verify:verify
+        verify:verify,
+        logOut:logOut
     }
 }
