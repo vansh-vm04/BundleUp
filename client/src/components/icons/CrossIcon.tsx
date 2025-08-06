@@ -1,29 +1,29 @@
-interface Props{
-  onClick:()=>void
+interface Props {
+  onClick: () => void;
 }
 
-const CrossIcon = (props:Props) => {
+const CrossIcon = (props: Props) => {
   return (
-    <svg
-    onClick={()=>props.onClick()}
-    className="size-3 hover:cursor-pointer fill-white"
-      styles="enable-background:new 0 0 36 36;"
-      version="1.1"
-      viewBox="0 0 36 36"
-      xml:space="preserve"
-      xmlns="http://www.w3.org/2000/svg"
-      xmlns:xlink="http://www.w3.org/1999/xlink"
+    <div
+      onClick={() => props.onClick()}
+      className="w-fit h-fit p-0.5  hover:cursor-pointer rounded-sm hover:bg-white/20"
     >
-      <style type="text/css"></style>
-      <g id="Layer_1" />
-      <g id="icons">
+      <svg
+        className="size-5 fill-white"
+        id="Outline"
+        viewBox="0 0 512 512"
+        xmlns="http://www.w3.org/2000/svg"
+      >
         <path
-          className="st0"
-          d="M6.2,3.5L3.5,6.2c-0.7,0.7-0.7,1.9,0,2.7l9.2,9.2l-9.2,9.2c-0.7,0.7-0.7,1.9,0,2.7l2.6,2.6   c0.7,0.7,1.9,0.7,2.7,0l9.2-9.2l9.2,9.2c0.7,0.7,1.9,0.7,2.7,0l2.6-2.6c0.7-0.7,0.7-1.9,0-2.7L23.3,18l9.2-9.2   c0.7-0.7,0.7-1.9,0-2.7l-2.6-2.6c-0.7-0.7-1.9-0.7-2.7,0L18,12.7L8.8,3.5C8.1,2.8,6.9,2.8,6.2,3.5z"
-          id="close_1_"
+          className="cls-1"
+          d="M357.71,154.32a11.33,11.33,0,0,0-16,0l-87.41,87.41-89.18-89.18a11.34,11.34,0,1,0-16,16l89.18,89.18-87.41,87.41a11.34,11.34,0,1,0,16,16l87.42-87.42,85.64,85.65a11.34,11.34,0,0,0,16-16L270.3,257.77l87.41-87.41A11.34,11.34,0,0,0,357.71,154.32Z"
         />
-      </g>
-    </svg>
+        <path
+          className="cls-1"
+          d="M377.75,58.65H133.47a74.91,74.91,0,0,0-74.82,74.82V377.75a74.9,74.9,0,0,0,74.82,74.81H377.75a74.9,74.9,0,0,0,74.81-74.81V133.47A74.9,74.9,0,0,0,377.75,58.65Zm52.13,319.1a52.18,52.18,0,0,1-52.13,52.13H133.47a52.19,52.19,0,0,1-52.14-52.13V133.47a52.2,52.2,0,0,1,52.14-52.14H377.75a52.19,52.19,0,0,1,52.13,52.14Z"
+        />
+      </svg>
+    </div>
   );
 };
 
