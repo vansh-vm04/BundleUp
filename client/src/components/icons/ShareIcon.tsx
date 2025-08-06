@@ -1,4 +1,4 @@
-interface Size{
+interface Props{
   size:"sm" | "md" | "lg";
   fill:'white' | 'black';
   onClick?: ()=>void;
@@ -8,10 +8,11 @@ const sizeType = {
   "md": "size-5.5",
   "lg": "size-8",
 };
-const ShareIcon = (props:Size) => {
+const ShareIcon = (props:Props) => {
   return (
     <svg
-      className={`${sizeType[props.size]} fill-${props.fill}`}
+    onClick={props.onClick}
+      className={`${sizeType[props.size]} fill-${props.fill} hover:cursor-pointer`}
       viewBox="0 0 32 32"
       xmlns="http://www.w3.org/2000/svg"
     >

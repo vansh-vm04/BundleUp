@@ -9,7 +9,7 @@ const CopyLinkCard = (props:Props) => {
     const {toast} = useToast()
     const copyToClipboard = (text:string) =>{
         navigator.clipboard.writeText(text);
-        toast('Copied to clipboard!')
+        toast('info','Link copied to clipboard!')
     }
   return (
     <div className="grid grid-cols-8 pt-2 gap-2 w-full max-w-[23rem]">
