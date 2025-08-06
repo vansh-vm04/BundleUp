@@ -42,6 +42,10 @@ const CreateContentModal = () => {
       toast("error", "Please fill in all fields.");
       return;
     }
+    if(titleRef.current.value.length > 30){
+      toast('error','Title is too long')
+      return;
+    }
     try {
       const token = localStorage.getItem("token");
       await axios.post(
