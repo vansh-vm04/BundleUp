@@ -1,3 +1,4 @@
+import { getDomainLogo } from "../../utils/domainLogo";
 import BundlesIcon from "../icons/BundlesIcon";
 
 interface LinkProps{
@@ -18,7 +19,7 @@ const LinkCard = (props:LinkProps) => {
     if(isTwitter){
         url = url.replace("x.com","twitter.com");
         return <div className="">
-            <blockquote class="twitter-tweet" data-theme="dark"><a href={url}>X Post</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charet="utf-8"></script>
+            <blockquote className="twitter-tweet" data-theme="dark"><a href={url}>X Post</a></blockquote> <script async src="https://platform.twitter.com/widgets.js" charet="utf-8"></script>
         </div>
     }
     if(isSpotify){
@@ -27,6 +28,15 @@ const LinkCard = (props:LinkProps) => {
          <iframe data-testid="embed-iframe" styles="border-radius:12px" src={url} width="100%" height={'344px'} frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" ></iframe>
     </div>
     }
+    const logo = getDomainLogo(url);
+    if(logo){
+        return (
+            <a target="_blank" href={url} className="flex hover:cursor-pointer w-full h-full items-center justify-center">
+            <img className="w-30" src={logo}></img>
+            </a>
+        )
+    }
+
   return (
     <a target="_blank" href={url} className="flex items-center justify-center h-full w-full hover:cursor-pointer">
           <BundlesIcon size="lg"/>

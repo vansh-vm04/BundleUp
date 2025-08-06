@@ -11,6 +11,7 @@ import SidebarToggle from "../icons/SidebarToggle";
 import { useSidebar } from "../../hooks/useSidebar";
 import { motion } from "framer-motion";
 import { AnimatePresence } from "framer-motion";
+import UserCard from "./UserCard";
 
 const Sidebar = () => {
   const sidebar = useSidebar();
@@ -65,6 +66,8 @@ const Sidebar = () => {
       transition={{ duration: 0.2, ease: "easeIn" }}
       className="bg-black fixed z-50 w-[324px] flex flex-col items-center gap-8 h-screen px-6"
     >
+      <div className="flex pb-8 flex-col w-full h-full items-center justify-between">
+        <div className="flex flex-col items-center gap-8 h-screen px-6">
       <div className="border-b-gray-500 py-8 flex items-center w-full justify-between border-b">
         <Logo />
         <SidebarToggle />
@@ -80,6 +83,9 @@ const Sidebar = () => {
             clicked={i.clicked}
           />
         ))}
+      </div>
+      </div>
+      <UserCard username="vanshdusjdj"/>
       </div>
     </motion.div>)}
     </AnimatePresence>

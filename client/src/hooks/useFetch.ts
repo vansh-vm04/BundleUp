@@ -4,7 +4,7 @@ import { useEffect, useState } from "react"
 export const useFetch = (url:string)=>{
     const [loading, setloading] = useState(false)
     const [data, setdata] = useState<any>({})
-    const [error, seterror] = useState<string | null>(null)
+    const [error, seterror] = useState<boolean>(false)
 
     const fetchData = async (url:string)=>{
         try {
@@ -17,7 +17,7 @@ export const useFetch = (url:string)=>{
             })
             setdata(response.data)
         } catch (error) {
-            seterror('Something went wrong, try again');
+            seterror(true);
             console.log(error)
         }finally{
             setloading(false);
