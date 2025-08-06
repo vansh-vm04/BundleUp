@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import Button from "../components/ui/Button";
 import Logo from "../components/icons/Logo";
 import { AnimatePresence, motion } from "framer-motion";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { useToast } from "../hooks/useToast";
 import { useNavigate } from "react-router-dom";
 import { useSidebar } from "../hooks/useSidebar";
@@ -23,7 +23,7 @@ const SignUp = () => {
 
   useEffect(() => {
     autoLogin()
-  })
+  },[])
 
   const {
     register,
@@ -39,7 +39,8 @@ const SignUp = () => {
       );
       const { token } = response.data;
       localStorage.setItem("token", token);
-      if (localStorage.getItem("token")) {
+      const tokenSaved = localStorage.getItem("token");
+      if (tokenSaved) {
         toast("success", "Signup Successful");
         navigate("/");
         sidebar?.toggle();
@@ -79,13 +80,13 @@ const SignUp = () => {
             <div className="flex flex-col w-full">
               <label
                 htmlFor="username"
-                className="block mb-1 text-sm font-medium text-gray-900 dark:text-white"
+                className="block mb-1 text-sm font-medium text-white"
               >
                 Username
               </label>
               <input
                 id="username"
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 mb-1 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                className=" border text-sm rounded-lg block w-full p-2.5 bg-gray-800 border-gray-600 placeholder-gray-400 mb-1 text-white focus:ring-blue-500 focus:border-blue-500"
                 {...register("username", {
                   required: true,
                   maxLength: 20,
@@ -99,13 +100,13 @@ const SignUp = () => {
               )}
               <label
                 htmlFor="password"
-                className="block mb-1 text-sm font-medium text-gray-900 dark:text-white"
+                className="block mb-1 text-sm font-medium text-white"
               >
                 Password
               </label>
               <input
                 id="password"
-                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                className=" border text-sm rounded-lg block w-full p-2.5 bg-gray-800 border-gray-600 placeholder-gray-400 mb-1 text-white focus:ring-blue-500 focus:border-blue-500"
                 {...register("password", {
                   required: true,
                   maxLength: 20,
