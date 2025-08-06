@@ -63,6 +63,7 @@ const CreateContentModal = () => {
       );
       toast('success','Content added to bundle');
       modal.closeModal()
+      window.location.reload();
     } catch (error) {
       toast('error','Something went wrong, try again')
       console.log(error)

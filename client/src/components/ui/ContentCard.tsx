@@ -6,13 +6,14 @@ import OtherIcon from "../icons/OtherIcon"
 import LinkCard from "./LinkCard"
 import { useToast } from "../../hooks/useToast"
 import DropdownMenu from "./DropdownMenu"
+import { useLocation } from "react-router-dom"
 
 interface ContentProps{
     title:string, 
     type:contentType,
     link:string,
     id:string,
-    deleteContent:(id:string)=>void,
+    deleteContent?:(id:string)=>void,
     [key:string]:unknown
 }
 type contentType = "video" | "audio" | "tweet" | "blog" | "other";
@@ -25,6 +26,8 @@ const Type = {
 }
 
 const ContentCard = (props:ContentProps) => {
+    const location = useLocation()
+    const isSharePage:boolean = location.pathname.includes('open');
     const {toast} = useToast()
         const copyToClipboard = (text:string) =>{
             navigator.clipboard.writeText(text);
@@ -53,7 +56,7 @@ const ContentCard = (props:ContentProps) => {
             <DeleteIcon onClick={props.deleteContent}/>
             <ShareIcon fill="white" onClick={()=>copyToClipboard(props.link)} size={"md"}/>
         </div> */}
-        <DropdownMenu options={dropdownOptions}/>
+        {!isSharePage && <DropdownMenu options={dropdownOptions}/>}
         </div>
         <LinkCard url={props.link}/>
     </div>
