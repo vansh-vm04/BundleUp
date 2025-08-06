@@ -1,0 +1,53 @@
+const platformLogos = [
+  { domain: "youtube.com", image: "https://cdn-icons-png.flaticon.com/512/1384/1384060.png" },
+  { domain: "youtu.be", image: "https://cdn-icons-png.flaticon.com/512/1384/1384060.png" },
+  { domain: "spotify.com", image: "https://cdn-icons-png.flaticon.com/512/174/174872.png" },
+  { domain: "soundcloud.com", image: "https://cdn-icons-png.flaticon.com/512/174/174872.png" },
+  { domain: "apple.com/music", image: "https://cdn-icons-png.flaticon.com/512/731/731985.png" },
+  { domain: "twitter.com", image: "https://cdn-icons-png.flaticon.com/512/733/733579.png" },
+  { domain: "x.com", image: "https://cdn-icons-png.flaticon.com/512/733/733579.png" },
+  { domain: "facebook.com", image: "https://cdn-icons-png.flaticon.com/512/733/733547.png" },
+  { domain: "instagram.com", image: "https://cdn-icons-png.flaticon.com/512/1384/1384063.png" },
+  { domain: "linkedin.com", image: "https://cdn-icons-png.flaticon.com/512/1384/1384014.png" },
+  { domain: "github.com", image: "https://cdn-icons-png.flaticon.com/512/733/733553.png" },
+  { domain: "gitlab.com", image: "https://cdn-icons-png.flaticon.com/512/5968/5968853.png" },
+  { domain: "bitbucket.org", image: "https://cdn-icons-png.flaticon.com/512/5968/5968862.png" },
+  { domain: "google.com", image: "https://cdn-icons-png.flaticon.com/512/300/300221.png" },
+  { domain: "drive.google.com", image: "https://cdn-icons-png.flaticon.com/512/270/270798.png" },
+  { domain: "docs.google.com", image: "https://cdn-icons-png.flaticon.com/512/5968/5968520.png" },
+  { domain: "meet.google.com", image: "https://cdn-icons-png.flaticon.com/512/300/300218.png" },
+  { domain: "calendar.google.com", image: "https://cdn-icons-png.flaticon.com/512/5968/5968512.png" },
+  { domain: "gmail.com", image: "https://cdn-icons-png.flaticon.com/512/281/281769.png" },
+  { domain: "notion.so", image: "https://cdn-icons-png.flaticon.com/512/5968/5968985.png" },
+  { domain: "medium.com", image: "https://cdn-icons-png.flaticon.com/512/2111/2111505.png" },
+  { domain: "dev.to", image: "https://cdn-icons-png.flaticon.com/512/2111/2111454.png" },
+  { domain: "hashnode.com", image: "https://cdn-icons-png.flaticon.com/512/5968/5968905.png" },
+  { domain: "stackblitz.com", image: "https://cdn-icons-png.flaticon.com/512/5968/5968915.png" },
+  { domain: "codepen.io", image: "https://cdn-icons-png.flaticon.com/512/2111/2111501.png" },
+  { domain: "codesandbox.io", image: "https://cdn-icons-png.flaticon.com/512/5968/5968909.png" },
+  { domain: "stackoverflow.com", image: "https://cdn-icons-png.flaticon.com/512/2111/2111628.png" },
+  { domain: "reddit.com", image: "https://cdn-icons-png.flaticon.com/512/2111/2111589.png" },
+  { domain: "whatsapp.com", image: "https://cdn-icons-png.flaticon.com/512/733/733585.png" },
+  { domain: "telegram.org", image: "https://cdn-icons-png.flaticon.com/512/2111/2111646.png" },
+  { domain: "discord.com", image: "https://cdn-icons-png.flaticon.com/512/5968/5968756.png" },
+  { domain: "figma.com", image: "https://cdn-icons-png.flaticon.com/512/5968/5968705.png" },
+  { domain: "pinterest.com", image: "https://cdn-icons-png.flaticon.com/512/733/733646.png" },
+  { domain: "tiktok.com", image: "https://cdn-icons-png.flaticon.com/512/3046/3046121.png" },
+  { domain: "behance.net", image: "https://cdn-icons-png.flaticon.com/512/2111/2111525.png" },
+  { domain: "dribbble.com", image: "https://cdn-icons-png.flaticon.com/512/2111/2111421.png" },
+  { domain: "amazon.com", image: "https://cdn-icons-png.flaticon.com/512/888/888839.png" },
+  { domain: "flipkart.com", image: "https://cdn-icons-png.flaticon.com/512/6124/6124994.png" },
+  { domain: "netflix.com", image: "https://cdn-icons-png.flaticon.com/512/732/732228.png" },
+  { domain: "primevideo.com", image: "https://cdn-icons-png.flaticon.com/512/732/732251.png" },
+  { domain: "hotstar.com", image: "https://cdn-icons-png.flaticon.com/512/14677/14677990.png" },
+  { domain: "zomato.com", image: "https://cdn-icons-png.flaticon.com/512/10673/10673810.png" },
+  { domain: "swiggy.com", image: "https://cdn-icons-png.flaticon.com/512/9183/9183992.png" },
+  { domain: "ubereats.com", image: "https://cdn-icons-png.flaticon.com/512/3437/3437363.png" },
+  { domain: "airbnb.com", image: "https://cdn-icons-png.flaticon.com/512/2111/2111602.png" }
+];
+
+export const getDomainLogo = (url:string)=>{
+      const hostname = new URL(url).hostname;
+      const imageUrl = platformLogos.find(p=>hostname.includes(p.domain))?.image;
+      return imageUrl ? imageUrl : null;
+    }
