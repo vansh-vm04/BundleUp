@@ -5,7 +5,7 @@ import {ContentModel, UserModel } from "./model";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { authMiddleware } from "./middleware";
-import * as z from "zod"; 
+import * as z from "zod";
 
 enum ResponseCode {
   Success = 200,
@@ -120,7 +120,7 @@ router.get('/content/:type',authMiddleware,async (req:Request,res:Response)=>{
     const userId = req.userId;
     try {
         let content;
-        if(contentType==''){
+        if(contentType === 'all'){
             content = await ContentModel.find({userId:userId});
         }else{
             content = await ContentModel.find({userId:userId,type:contentType});
@@ -140,8 +140,8 @@ router.patch('/content',authMiddleware,async (req:Request,res:Response)=>{
         console.log(error)
     }
 })
-router.delete('/content',authMiddleware,async (req:Request,res:Response)=>{
-    const {contentId} = req.body;
+router.delete('/content/:contentId',authMiddleware,async (req:Request,res:Response)=>{
+    const {contentId} = req.params;
     try {
         await ContentModel.deleteOne({_id:contentId})
         res.status(ResponseCode.Success).json({message:"Resource deleted successfully"})
@@ -162,12 +162,12 @@ router.patch('/share',authMiddleware,async (req:Request,res:Response)=>{
         console.log(error)
     }
 })
-router.get('/open/:userId',async (req:Request,res:Response)=>{
-    const userId = req.params.userId;
+router.get('/open/:username',async (req:Request,res:Response)=>{
+    const username = req.params.username;
     try {
-        const user = await UserModel.findById(userId);
+        const user = await UserModel.findOne({username});
         if(!user?.share) return res.status(ResponseCode.Success).json({message:"Content Private",username:user?.username,content:[]});
-        const content = await ContentModel.find({userId:userId});
+        const content = await ContentModel.find({userId:user._id});
         res.status(ResponseCode.Success).json({message:"Content found",username:user?.username,content:content});
     } catch (error) {
         res.status(ResponseCode.ServerError).json({message:"Internal server error"})

@@ -6,6 +6,8 @@ import SignUp from "./pages/SignUp"
 import CreateContentModal from "./components/ui/CreateContentModal"
 import ShareContentModal from "./components/ui/ShareContentModal"
 import ToastMessage from "./components/ui/ToastMessage"
+import SharePage from "./pages/SharePage"
+import ErrorPage from "./pages/ErrorPage"
 
 function App() {
   const location = useLocation();
@@ -26,6 +28,8 @@ function App() {
       <Route path='/other' element={<Home/>}/>
       <Route path='/signup' element={<SignUp/>}/>
       <Route path='/signin' element={<SignIn/>}/>
+      <Route path='/open/:username' element={<SharePage/>}/>
+      <Route path='*' element={<ErrorPage/>}/>
     </Routes>
   </div>
   )
