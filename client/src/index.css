@@ -17,6 +17,7 @@
 body{
   background-color: oklch(37.53% 0.00004 271.152);
   font-family: "Poppins";
+  color:white;
   margin:0;
   padding:0;
   scroll-behavior: smooth;
