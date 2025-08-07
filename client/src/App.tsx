@@ -8,6 +8,7 @@ import ShareContentModal from "./components/ui/ShareContentModal"
 import ToastMessage from "./components/ui/ToastMessage"
 import SharePage from "./pages/SharePage"
 import ErrorPage from "./pages/ErrorPage"
+import { Analytics } from "@vercel/analytics/react"
 
 function App() {
   const location = useLocation();
@@ -31,6 +32,7 @@ function App() {
       <Route path='/open/:username' element={<SharePage/>}/>
       <Route path='*' element={<ErrorPage/>}/>
     </Routes>
+    <Analytics/>
   </div>
   )
 }
