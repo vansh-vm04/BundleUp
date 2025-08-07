@@ -82,7 +82,7 @@ const Home = () => {
         'Authorization' : 'Bearer '+token
       }
     })
-    let newContent = filteredContent.filter(c=>c._id!=id);
+    const newContent = filteredContent.filter(c=>c._id!=id);
     if(newContent) setfilteredContent(newContent);
   }
 
@@ -116,18 +116,17 @@ const Home = () => {
           />
         </div>
       </div>
-      {filteredContent.length > 0 ? (
+      {filteredContent.length > 0 && (
         <div className=" items-center justify-center overflow-y-scroll hide-scrollbar scroll-smooth flex flex-wrap py-6 gap-6">
           {filteredContent.map((c, i) => (
             <ContentCard key={i} title={c.title} type={c.type} link={c.link} id={c._id} deleteContent={deleteContent}/>
           ))}
         </div>
-      ) : (
-        <div className="text-gray-400 pt-50 p-4 text-2xl w-full gap-2 flex flex-col items-center justify-center">
-          <span className="text-center">Welcome!</span>
-          <span className="text-center">Add some content, it will appear here.</span>
-        </div>
       )}
+      {(filteredContent.length == 0 && !loading) && <div className="text-gray-400 pt-50 p-4 text-2xl w-full gap-2 flex flex-col items-center justify-center">
+          <span className="text-center">Welcome!</span>
+          <span className="text-center">Add some {url} content, it will appear here.</span>
+        </div>}
       <Loading loading = {loading}/>
     </div>
   );
