@@ -6,7 +6,7 @@
 
 - Frontend: React, TypeScript, TailwindCSS, Framer Motion
 - Backend: Node.js, Express
-- Deployment: Vercel (Frontend), Render/Backend service (Optional)
+- Deployment: Vercel (Frontend), Render (Backend)
 
 ## 🚀 Features
 
