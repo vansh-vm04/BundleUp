@@ -1,6 +1,9 @@
 # 📦 BundleUp
 
-[**BundleUp**](https://bundleup.vercel.app) lets you save, organize, and share all your favorite content—videos, tweets, blogs, and more—in one place.
+[**BundleUp**](https://bundleup.vercel.app) lets you save, organize, and share all your favorite videos, tweets, blogs, and more in one place.
+
+## 🪟 Screenshot
+<img style='width:50rem' src='./assets/demo.png'></img>
 
 ## ⚙️ Tech Stack
 
